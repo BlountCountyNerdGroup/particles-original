@@ -1,2 +1,3 @@
 # particles-original
-Original version of the particle simulator
+
+Spawns in a bunch of square particles into a canvas with colors, transparency, gravity, etc.
