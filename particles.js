@@ -2,7 +2,8 @@ var canvas = document.createElement("canvas"),
     c = canvas.getContext("2d"),
     particles = {},
     particleIndex = 0,
-    particleNum = 10;
+    particleNum = 10,
+    mousePos = {x: 0,y: 0};
     
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -13,8 +14,8 @@ c.fillStyle = "black";
 c.fillRect(0,0,canvas.width,canvas.height);
     
 function Particle() {
-    this.x = canvas.width / 2;
-    this.y = canvas.height / 2;
+    this.x = mousePos.x;
+    this.y = mousePos.y;
     this.vx = Math.random() * 10 - 5;
     this.vy = Math.random() * 10 - 5;
     
@@ -52,6 +53,17 @@ Particle.prototype.draw = function() {
     c.fillStyle= this.color;
     c.fillRect(this.x,this.y,10,10);
 };
+
+function getMousePos(event) {
+    return {
+        x: event.clientX,
+        y: event.clientY 
+    };
+}
+
+window.addEventListener("mousemove", function(event) {
+    mousePos = getMousePos(event);
+});
 
 setInterval(function(){
     c.globalCompositeOperation = "source-over";
